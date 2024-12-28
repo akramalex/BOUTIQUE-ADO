@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
+import dj_database_url
 
 from pathlib import Path
 
@@ -124,9 +125,16 @@ WSGI_APPLICATION = 'boutique_ado.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+DATABASES = {
+    'default': dj_database_url.parse(
+        'postgresql://neondb_owner:8WMt5qUEvIYm@ep-fancy-field-a2utw236.eu-central-1.aws.neon.tech/cold_send_patch_75704'
+    )
+}
+ 
 CSRF_TRUSTED_ORIGINS = ['https://8000-akramalex-boutiqueado-9s2nyeyhi8r.ws.codeinstitute-ide.net']
 
 # Password validation
