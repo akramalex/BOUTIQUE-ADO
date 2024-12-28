@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-2@6yu9s^j&w14)ui-5%@iis-$lj98pc$xz1@ad$tgo$t+40%+)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['8000-akramalex-boutiqueado-9s2nyeyhi8r.ws.codeinstitute-ide.net']
+ALLOWED_HOSTS = ['8000-akramalex-boutiqueado-9s2nyeyhi8r.ws.codeinstitute-ide.net', 'boutique-ado10.herokuapp.com']
 
 
 # Application definition
@@ -122,18 +122,17 @@ WSGI_APPLICATION = 'boutique_ado.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+if 'DATABASE_URL' in os.environ:
+    DATABASES = {
+        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
     }
-}
-
-DATABASES = {
-    'default': dj_database_url.parse(
-        'postgresql://neondb_owner:8WMt5qUEvIYm@ep-fancy-field-a2utw236.eu-central-1.aws.neon.tech/cold_send_patch_75704'
-    )
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
  
 CSRF_TRUSTED_ORIGINS = ['https://8000-akramalex-boutiqueado-9s2nyeyhi8r.ws.codeinstitute-ide.net']
 
