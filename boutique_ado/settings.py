@@ -10,6 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
+if os.path.exists("env.py"):
+  import env
+
+
 import dj_database_url
 
 from pathlib import Path
@@ -189,6 +193,8 @@ if 'USE_AWS' in os.environ:
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 
+    print('AWS_SECRET_ACCESS_KEY:', AWS_SECRET_ACCESS_KEY)
+    print('AWS_ACCESS_KEY_ID:', AWS_ACCESS_KEY_ID)
     # Static and media files
     STATICFILES_LOCATION = 'static'
     STORAGES = {
